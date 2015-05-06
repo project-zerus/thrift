@@ -1,3 +1,5 @@
+licenses(['notice'])
+
 genrule(
   name = 'thrifty_bison',
   srcs = [
@@ -96,7 +98,7 @@ cc_binary(
     'src/generate/t_st_generator.cc',
     'src/generate/t_xsd_generator.cc',
   ],
-  malloc = '//jemalloc:jemalloc',
+  malloc = '//external:jemalloc',
   linkstatic = 1,
   linkshared = 0,
   linkopts = [
