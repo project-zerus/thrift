@@ -59,7 +59,8 @@ cc_library(
   includes = [
     '.',
     'src',
-  ]
+  ],
+  linkstatic = 1,
 )
 
 cc_binary(
