@@ -59,16 +59,35 @@ cc_library(
   includes = [
     '.',
     'src',
-  ]
+  ],
+  linkstatic = 1,
+  copts = [
+    '-std=c++98'
+  ],
+)
+
+cc_library(
+  name = 'md5',
+  srcs = [
+    'src/md5.c',
+  ],
+  includes = [
+    '.',
+    'src',
+  ],
+  linkstatic = 1,
+  copts = [
+    '-ansi'
+  ],
 )
 
 cc_binary(
   name = 'thrift',
   deps = [
     ':parse',
+    ':md5'
   ],
   srcs = [
-    'src/md5.c',
     'src/main.cc',
     'src/generate/t_as3_generator.cc',
     'src/generate/t_cocoa_generator.cc',
@@ -92,9 +111,8 @@ cc_binary(
   linkstatic = 1,
   linkshared = 0,
   linkopts = [
-    '-pthread',
   ],
   copts = [
-    '-std=c++98',
-  ]
+    '-std=c++98'
+  ],
 )
