@@ -34,7 +34,7 @@
 
 #include "platform.h"
 #include "t_oop_generator.h"
-#include "version.h"
+#include "thrift/compiler/cpp/version.h"
 
 using std::map;
 using std::ofstream;

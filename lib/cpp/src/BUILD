@@ -1,0 +1,62 @@
+cc_library(
+  name = 'libthrift',
+  warning = 'no',
+  export_incs = [
+    '.',
+  ],
+  srcs = [
+    'thrift/Thrift.cpp',
+    'thrift/TApplicationException.cpp',
+    'thrift/VirtualProfiling.cpp',
+
+    'thrift/processor/PeekProcessor.cpp',
+
+    'thrift/protocol/TBase64Utils.cpp',
+    'thrift/protocol/TDebugProtocol.cpp',
+    'thrift/protocol/TDenseProtocol.cpp',
+    'thrift/protocol/TJSONProtocol.cpp',
+    'thrift/protocol/TMultiplexedProtocol.cpp',
+
+    'thrift/transport/TBufferTransports.cpp',
+    'thrift/transport/TFDTransport.cpp',
+    'thrift/transport/TFileTransport.cpp',
+    'thrift/transport/THttpClient.cpp',
+    'thrift/transport/THttpServer.cpp',
+    'thrift/transport/THttpTransport.cpp',
+    'thrift/transport/TPipe.cpp',
+    'thrift/transport/TPipeServer.cpp',
+    'thrift/transport/TServerSocket.cpp',
+    'thrift/transport/TSimpleFileTransport.cpp',
+    'thrift/transport/TSocket.cpp',
+    'thrift/transport/TSocketPool.cpp',
+    'thrift/transport/TSSLServerSocket.cpp',
+    'thrift/transport/TSSLSocket.cpp',
+    'thrift/transport/TTransportException.cpp',
+    'thrift/transport/TTransportUtils.cpp',
+    'thrift/transport/TZlibTransport.cpp',
+
+    'thrift/server/TNonblockingServer.cpp',
+    'thrift/server/TServer.cpp',
+    'thrift/server/TSimpleServer.cpp',
+    'thrift/server/TThreadedServer.cpp',
+    'thrift/server/TThreadPoolServer.cpp',
+
+    'thrift/async/TAsyncChannel.cpp',
+    'thrift/async/TAsyncProtocolProcessor.cpp',
+    'thrift/async/TEvhttpClientChannel.cpp',
+    'thrift/async/TEvhttpServer.cpp',
+
+    'thrift/concurrency/Monitor.cpp',
+    'thrift/concurrency/Mutex.cpp',
+    'thrift/concurrency/PosixThreadFactory.cpp',
+    'thrift/concurrency/ThreadManager.cpp',
+    'thrift/concurrency/TimerManager.cpp',
+    'thrift/concurrency/Util.cpp',
+  ],
+  deps = [
+    '//boost:boost',
+    '//openssl:openssl',
+    '//libevent:libevent',
+    '//zlib:zlib',
+  ],
+)
