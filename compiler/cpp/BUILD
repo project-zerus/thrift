@@ -67,7 +67,6 @@ cc_binary(
   name = 'thrift',
   deps = [
     ':parse',
-    '//external:pthread',
   ],
   srcs = [
     'src/md5.c',
