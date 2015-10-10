@@ -114,7 +114,6 @@ cc_binary(
     'src/main.cc',
     'src/parse/parse.cc',
   ],
-  malloc = '//external:jemalloc',
   linkstatic = 1,
   linkshared = 0,
   linkopts = [
