@@ -25,7 +25,7 @@
 
 #include "globals.h"
 #include "t_generator.h"
-#include "version.h"
+#include "thrift/compiler/cpp/version.h"
 
 #include <algorithm>
 

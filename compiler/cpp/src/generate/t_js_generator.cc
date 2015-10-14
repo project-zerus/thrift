@@ -28,7 +28,7 @@
 #include <sys/stat.h>
 #include <sstream>
 #include "platform.h"
-#include "version.h"
+#include "thrift/compiler/cpp/version.h"
 
 using std::map;
 using std::ofstream;

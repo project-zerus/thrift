@@ -19,7 +19,7 @@
 #include "parse/t_const.h"
 #include "parse/t_field.h"
 
-#include "version.h"
+#include "thrift/compiler/cpp/version.h"
 
 #include "t_audit.h"
 
