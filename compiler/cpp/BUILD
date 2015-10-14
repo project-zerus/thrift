@@ -62,6 +62,7 @@ cc_library(
 
 cc_binary(
   name = 'thrift',
+  visibility = ['//visibility:public'],
   deps = [
     ':parse',
   ],
