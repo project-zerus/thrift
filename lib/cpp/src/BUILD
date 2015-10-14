@@ -34,7 +34,6 @@ cc_library(
     'thrift/transport/TZlibTransport.cpp',
 
     'thrift/server/TConnectedClient.cpp',
-    'thrift/server/TNonblockingServer.cpp',
     'thrift/server/TServer.cpp',
     'thrift/server/TServerFramework.cpp',
     'thrift/server/TSimpleServer.cpp',
@@ -44,8 +43,6 @@ cc_library(
     'thrift/async/TAsyncChannel.cpp',
     'thrift/async/TAsyncProtocolProcessor.cpp',
     'thrift/async/TConcurrentClientSyncInfo.cpp',
-    'thrift/async/TEvhttpClientChannel.cpp',
-    'thrift/async/TEvhttpServer.cpp',
 
     'thrift/concurrency/Monitor.cpp',
     'thrift/concurrency/Mutex.cpp',
