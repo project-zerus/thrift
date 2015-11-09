@@ -1,6 +1,4 @@
-licenses(['notice'])
-
-genrule(
+gen_rule(
   name = 'thrifty_bison',
   srcs = [
     'src/thrifty.yy',
@@ -9,10 +7,10 @@ genrule(
     'thrifty.cc',
     'thrifty.hh',
   ],
-  cmd = 'bison $(location src/thrifty.yy) -d -o $(location thrifty.cc)',
+  cmd = 'bison $FIRST_SRC -d -o $FIRST_OUT',
 )
 
-genrule(
+gen_rule(
   name = 'thriftl_flex',
   srcs = [
     'src/thriftl.ll',
@@ -20,21 +18,10 @@ genrule(
   outs = [
     'thriftl.cc'
   ],
-  cmd = 'flex -o $(OUTS) $(SRCS)',
+  cmd = 'flex -o $FIRST_OUT $FIRST_SRC',
 )
 
-genrule(
-  name = 'thrifty_h',
-  srcs = [
-    'thrifty.hh',
-  ],
-  outs = [
-    'thrifty.h',
-  ],
-  cmd = 'cp $(SRCS) $(OUTS)',
-)
-
-genrule(
+gen_rule(
   name = 'version_h',
   srcs = [
     'version.h.in',
@@ -42,28 +29,24 @@ genrule(
   outs = [
     'version.h',
   ],
-  cmd = 'cat $(SRCS) | sed -e "s/@PACKAGE_VERSION@/0.5.0/g" > $(OUTS)',
+  cmd = 'cat $FIRST_SRC | sed -e \\"s/@PACKAGE_VERSION@/0.5.0/g\\" > $FIRST_OUT',
 )
 
 cc_library(
   name = 'parse',
-  hdrs = [
-    'thrifty.h',
-    'thrifty.hh',
-    'version.h',
-  ],
   srcs = [
     'thrifty.cc',
     'thriftl.cc',
   ],
-  includes = [
+  incs = [
     '.',
     'src',
   ],
-  linkstatic = 1,
-  copts = [
-    '-std=c++98'
-  ],
+  deps = [
+    ':version_h',
+    ':thrifty_bison',
+    ':thriftl_flex',
+  ]
 )
 
 cc_library(
@@ -71,21 +54,22 @@ cc_library(
   srcs = [
     'src/md5.c',
   ],
-  includes = [
+  incs = [
     '.',
     'src',
-  ],
-  linkstatic = 1,
-  copts = [
-    '-ansi'
   ],
 )
 
 cc_binary(
   name = 'thrift',
+  warning = 'no',
   deps = [
     ':parse',
     ':md5'
+  ],
+  incs = [
+    '.',
+    'src',
   ],
   srcs = [
     'src/main.cc',
@@ -107,12 +91,5 @@ cc_binary(
     'src/generate/t_rb_generator.cc',
     'src/generate/t_st_generator.cc',
     'src/generate/t_xsd_generator.cc',
-  ],
-  linkstatic = 1,
-  linkshared = 0,
-  linkopts = [
-  ],
-  copts = [
-    '-std=c++98'
   ],
 )

@@ -51,7 +51,7 @@
 #include "parse/t_scope.h"
 #include "generate/t_generator.h"
 
-#include "version.h"
+#include "thrift/compiler/cpp/version.h"
 
 using namespace std;
 
