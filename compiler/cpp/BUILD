@@ -49,7 +49,7 @@ cc_library(
     'thrifty.h',
     'thrifty.hh',
     'version.h',
-  ],
+  ] + glob(['**/*.h']),
   srcs = [
     'thrifty.cc',
     'thriftl.cc',

@@ -4,6 +4,10 @@ cc_library(
   deps = [
     '//external:boost'
   ],
+  hdrs = glob([
+    'thrift/**/*.h',
+    'thrift/**/*.tcc',
+  ]),
   srcs = [
     'thrift/TApplicationException.cpp',
     'thrift/TOutput.cpp',
