@@ -1013,7 +1013,7 @@ void TNonblockingServer::createAndListenOnSocket() {
   sprintf(port, "%d", port_);
 
   // Wildcard address
-  error = getaddrinfo(NULL, port, &hints, &res0);
+  error = getaddrinfo(host_.empty() ? NULL : host_.c_str(), port, &hints, &res0);
   if (error) {
     throw TException("TNonblockingServer::serve() getaddrinfo "
                      + string(THRIFT_GAI_STRERROR(error)));

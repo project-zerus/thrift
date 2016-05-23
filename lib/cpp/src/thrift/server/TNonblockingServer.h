@@ -157,6 +157,9 @@ private:
   /// Server socket file descriptor
   THRIFT_SOCKET serverSocket_;
 
+  /// Host IP the server binds to
+  std::string host_;
+
   /// Port server runs on. Zero when letting OS decide actual port
   int port_;
 
@@ -279,11 +282,12 @@ private:
    */
   void handleEvent(THRIFT_SOCKET fd, short which);
 
-  void init(int port) {
+  void init(int port, const std::string& host = "") {
     serverSocket_ = THRIFT_INVALID_SOCKET;
     numIOThreads_ = DEFAULT_IO_THREADS;
     nextIOThread_ = 0;
     useHighPriorityIOThreads_ = false;
+    host_ = host;
     port_ = port;
     listenPort_ = port;
     userEventBase_ = NULL;
@@ -331,6 +335,21 @@ public:
     setThreadManager(threadManager);
   }
 
+  TNonblockingServer(const boost::shared_ptr<TProcessorFactory>& processorFactory,
+                     const boost::shared_ptr<TProtocolFactory>& protocolFactory,
+                     const std::string& host,
+                     int port,
+                     const boost::shared_ptr<ThreadManager>& threadManager
+                     = boost::shared_ptr<ThreadManager>())
+    : TServer(processorFactory) {
+
+    init(port, host);
+
+    setInputProtocolFactory(protocolFactory);
+    setOutputProtocolFactory(protocolFactory);
+    setThreadManager(threadManager);
+  }
+
   TNonblockingServer(const boost::shared_ptr<TProcessor>& processor,
                      const boost::shared_ptr<TProtocolFactory>& protocolFactory,
                      int port,
@@ -339,6 +358,21 @@ public:
     : TServer(processor) {
 
     init(port);
+
+    setInputProtocolFactory(protocolFactory);
+    setOutputProtocolFactory(protocolFactory);
+    setThreadManager(threadManager);
+  }
+
+  TNonblockingServer(const boost::shared_ptr<TProcessor>& processor,
+                     const boost::shared_ptr<TProtocolFactory>& protocolFactory,
+                     const std::string& host,
+                     int port,
+                     const boost::shared_ptr<ThreadManager>& threadManager
+                     = boost::shared_ptr<ThreadManager>())
+    : TServer(processor) {
+
+    init(port, host);
 
     setInputProtocolFactory(protocolFactory);
     setOutputProtocolFactory(protocolFactory);
